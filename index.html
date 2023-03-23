@@ -4,11 +4,53 @@
     <meta charset="utf-8">
     <title>Bluey Episode Randomizer</title>
     <style>
+      body {
+        background-color: #1B82C5;
+        font-family: Arial, sans-serif;
+        color: #FFFFFF;
+        text-align: center;
+      }
+      
+      h1 {
+        font-size: 48px;
+        margin-top: 50px;
+      }
+      
+      h2 {
+        font-size: 36px;
+        margin-top: 30px;
+      }
+      
+      p {
+        font-size: 24px;
+        margin-top: 20px;
+      }
+      
+      button {
+        font-size: 24px;
+        margin-top: 30px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        background-color: #FDD92B;
+        color: #000000;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+      
+      button:hover {
+        background-color: #FEE658;
+      }
+      
+      #episode-details {
+        margin-top: 50px;
+      }
+      
       .thumbnail {
         max-width: 200px;
         max-height: 200px;
         margin: 10px;
-        border: 1px solid black;
+        border: 1px solid white;
         border-radius: 10px;
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
         animation: thumbnail-animation 3s ease-in-out;
@@ -33,6 +75,11 @@
     <p>Click the button below to pick a random episode of Bluey!</p>
     <button onclick="pickEpisode()">Pick an Episode</button>
     <div id="episode-details"></div>
+    <div id="family-pictures">
+      <img src="https://i.imgur.com/xtl0t8K.png" alt="Bluey and Bingo">
+      <img src="https://i.imgur.com/YX9pbJq.png" alt="Bandit and Chilli">
+      <img src="https://i.imgur.com/zhxI8iZ.png" alt="Snickers">
+    </div>
     <script>
       async function pickEpisode() {
         // Fetch the list of Bluey episodes from a JSON file
@@ -46,15 +93,19 @@
         // Display the episode title, season, episode number, and thumbnail
         const episodeDetails = document.getElementById('episode-details');
         episodeDetails.innerHTML = `
-          <h2>The randomly selected Bluey episode is: ${randomEpisode.title}</h2>
-          <p>Season: ${randomEpisode.season}, Episode: ${randomEpisode.episode}</p>
-          <img id="thumbnail" class="thumbnail" src="${randomEpisode.thumbnail}" alt="${randomEpisode.title} thumbnail">
+          <h2>The randomly selected Bluey episode is:</h2>
+          <p>${randomEpisode.title}</p>
+          <p>Season ${randomEpisode.season}, Episode ${randomEpisode.episode}</p>
+          <img class="thumbnail stop-animation" src="${randomEpisode.thumbnail}" alt="Thumbnail for ${randomEpisode.title}">
         `;
-        
-        // Stop the thumbnail animation after 3 seconds
-        setTimeout(() => {
-          const thumbnail = document.getElementById('thumbnail');
-          thumbnail.classList.add('stop-animation');
+
+        // Start the animation to cycle through the episode thumbnails
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        let currentIndex = 0;
+        const animationInterval = setInterval(() => {
+          thumbnails[currentIndex].classList.add('stop-animation');
+          currentIndex = (currentIndex + 1) % thumbnails.length;
+          thumbnails[currentIndex].classList.remove('stop-animation');
         }, 3000);
       }
     </script>
