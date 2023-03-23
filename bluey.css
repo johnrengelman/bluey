@@ -16,6 +16,26 @@ meta[name="viewport"] {
     padding: 0;
   }
 
+  #family-pictures {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  #family-pictures img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 10px;
+    border: 1px solid white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    animation: thumbnail-animation 3s ease-in-out;
+  }
+  
+
   /* Set up media queries for different screen sizes */
   /* For screens 600px wide and below */
   @media only screen and (max-width: 600px) {
