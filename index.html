@@ -83,7 +83,8 @@
     <script>
       async function pickEpisode() {
         // Fetch the list of Bluey episodes from a JSON file
-        const response = await fetch('https://gist.githubusercontent.com/g1st/fc2a63a2953b60f324f3e4780a5af5b8/raw/aeecbd54d9c9a1de767f82008ba46d2c2c270b62/bluey-episodes.json');
+        let dataUrl = 'https://www.episodate.com/api/show-details?q=bluey'
+        const response = await fetch(dataUrl);
         const episodes = await response.json();
         
         // Pick a random episode from the list
@@ -94,9 +95,9 @@
         const episodeDetails = document.getElementById('episode-details');
         episodeDetails.innerHTML = `
           <h2>The randomly selected Bluey episode is:</h2>
-          <p>${randomEpisode.title}</p>
+          <p>${randomEpisode.name}</p>
           <p>Season ${randomEpisode.season}, Episode ${randomEpisode.episode}</p>
-          <img class="thumbnail stop-animation" src="${randomEpisode.thumbnail}" alt="Thumbnail for ${randomEpisode.title}">
+          <img class="thumbnail stop-animation" src="${randomEpisode.thumbnail}" alt="Thumbnail for ${randomEpisode.name}">
         `;
 
         // Start the animation to cycle through the episode thumbnails
