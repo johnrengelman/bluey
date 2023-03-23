@@ -85,7 +85,8 @@
         // Fetch the list of Bluey episodes from a JSON file
         let dataUrl = 'https://www.episodate.com/api/show-details?q=bluey'
         const response = await fetch(dataUrl);
-        const episodes = await response.json();
+        const data = await response.json();
+        const episodes = data.tvShow.episodes;
         
         // Pick a random episode from the list
         const randomIndex = Math.floor(Math.random() * episodes.length);
